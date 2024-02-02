@@ -66,6 +66,7 @@ class _LocalHeroState extends State<LocalHero>
   void initState() {
     super.initState();
     scopeState = context.getLocalHeroScopeState();
+    scopeState.untrack(widget);
     controller = scopeState.track(context, widget);
   }
 
