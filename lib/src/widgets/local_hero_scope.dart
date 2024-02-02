@@ -62,9 +62,10 @@ class _LocalHeroScopeState extends State<LocalHeroScope>
 
   @override
   LocalHeroController track(BuildContext context, LocalHero localHero) {
-    final _LocalHeroTracker tracker = trackers.putIfAbsent(
+    final _LocalHeroTracker tracker = trackers.update(
       localHero.tag,
-      () => createTracker(context, localHero),
+      (value) => createTracker(context, localHero),
+      ifAbsent: () => createTracker(context, localHero),
     );
     tracker.count++;
     return tracker.controller;
