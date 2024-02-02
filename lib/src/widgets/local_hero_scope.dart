@@ -68,6 +68,7 @@ class _LocalHeroScopeState extends State<LocalHeroScope>
       ifAbsent: () => createTracker(context, localHero),
     );
     tracker.count++;
+    print("new");
     return tracker.controller;
   }
 
