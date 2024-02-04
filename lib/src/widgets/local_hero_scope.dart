@@ -101,7 +101,7 @@ class _LocalHeroScopeState extends State<LocalHeroScope>
         },
       );
       
-      tracker.addNewOverlay(overlayEntry);
+      tracker.overlayEntry = overlayEntry;
       tracker.addOverlay(context);
     }
     
@@ -214,7 +214,7 @@ class _LocalHeroTracker {
     }
   }
 
-  void addNewOverlay(OverlayEntry newOverlayEntry) {
+  set overlayEntry(OverlayEntry newOverlayEntry) {
       overoverlayEntry = newOverlayEntry;
      _removeRequested = false;
     
