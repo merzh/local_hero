@@ -75,6 +75,15 @@ class _LocalHeroScopeState extends State<LocalHeroScope>
     if (_remove)
     {
       tracker.removeOverlay();
+
+      final LocalHeroController controller = LocalHeroController(
+        duration: widget.duration,
+        createRectTween: widget.createRectTween,
+        curve: widget.curve,
+        tag: localHero.tag,
+        vsync: this,
+        onlyAnimateRemount: widget.onlyAnimateRemount,
+      );
       
       final Widget shuttle = localHero.flightShuttleBuilder?.call(
           context,
