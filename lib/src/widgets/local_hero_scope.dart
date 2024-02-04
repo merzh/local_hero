@@ -75,6 +75,25 @@ class _LocalHeroScopeState extends State<LocalHeroScope>
     if (_remove)
     {
       tracker.removeOverlay();
+      
+      final Widget shuttle = localHero.flightShuttleBuilder?.call(
+          context,
+          controller.view,
+          localHero.child,
+        ) ??
+        localHero.child;
+
+      final OverlayEntry overlayEntry = OverlayEntry(
+        builder: (context) {
+          return LocalHeroFollower(
+            controller: controller,
+            child: shuttle,
+          );
+        },
+      );
+      
+      tracker.addNewOverlay(overlayEntry);
+      tracker.addOverlay(context);
     }
     
     tracker.count++;
@@ -184,6 +203,12 @@ class _LocalHeroTracker {
     if (_overlayInserted) {
       overlayEntry.remove();
     }
+  }
+
+  void addNewOverlay(OverlayEntry newOverlayEntry) {
+      overoverlayEntry = newOverlayEntry;
+     _removeRequested = false;
+    
   }
 }
 
