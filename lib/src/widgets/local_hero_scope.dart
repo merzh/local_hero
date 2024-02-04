@@ -62,48 +62,15 @@ class _LocalHeroScopeState extends State<LocalHeroScope>
 
   @override
   LocalHeroController track(BuildContext context, LocalHero localHero) {
-    bool _remove = false;
     if (trackers.containsKey(localHero.tag))
     {
-      _remove = true;
+      untrack(localHero);
     } 
     
     final _LocalHeroTracker tracker = trackers.putIfAbsent(
       localHero.tag,
       () => createTracker(context, localHero),
     );
-    if (_remove)
-    {
-      tracker.removeOverlay();
-
-      final LocalHeroController controller = LocalHeroController(
-        duration: widget.duration,
-        createRectTween: widget.createRectTween,
-        curve: widget.curve,
-        tag: localHero.tag,
-        vsync: this,
-        onlyAnimateRemount: widget.onlyAnimateRemount,
-      );
-      
-      final Widget shuttle = localHero.flightShuttleBuilder?.call(
-          context,
-          controller.view,
-          localHero.child,
-        ) ??
-        localHero.child;
-
-      final OverlayEntry overlayEntry = OverlayEntry(
-        builder: (context) {
-          return LocalHeroFollower(
-            controller: controller,
-            child: shuttle,
-          );
-        },
-      );
-      
-      tracker.overlayEntry = overlayEntry;
-      tracker.addOverlay(context);
-    }
     
     tracker.count++;
     
