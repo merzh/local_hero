@@ -215,7 +215,7 @@ class _LocalHeroTracker {
   }
 
   set overlayEntry(OverlayEntry newOverlayEntry) {
-      overoverlayEntry = newOverlayEntry;
+      overlayEntry = newOverlayEntry;
      _removeRequested = false;
     
   }
